@@ -1,6 +1,6 @@
 <template>
   <header>
-    <h1>리스트 추가</h1>
+    <h1>메모장</h1>
   </header>
 </template>
 
