@@ -22,17 +22,17 @@
 import Modal from './common/Modal.vue';
 
 export default {
-  data : function(){
+  data(){
     return {
       newTodoItem : "",
       showModal:false
     }
   },
   components : {
-     Modal : Modal
+     Modal
   },
   methods : {
-    addTodo : function(){
+    addTodo(){
       if(this.newTodoItem !== ''){
         this.$emit('addTodoItem',this.newTodoItem);
         this.clearInput();
@@ -42,7 +42,7 @@ export default {
       }
     },
     //  addTodo를 저장하는 메소드로만 지정을 하기위해 따로 분리
-    clearInput : function(){
+    clearInput(){
       this.newTodoItem = '';
     }
   }

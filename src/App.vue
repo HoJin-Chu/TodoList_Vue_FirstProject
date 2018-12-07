@@ -17,20 +17,25 @@ import TodoList from './components/TodoList.vue';
 import TodoFooter from './components/TodoFooter.vue';
 
 export default {
-  data:function(){
+  data(){
     return {
       todoItems : []
     }
   },
   components : {
-    'TodoHeader' : TodoHeader,
-    'TodoInput' : TodoInput,
-    'TodoList' : TodoList,
-    'TodoFooter' : TodoFooter,
+    // 'TodoHeader' : TodoHeader,
+    // 'TodoInput' : TodoInput,
+    // 'TodoList' : TodoList,
+    // 'TodoFooter' : TodoFooter,
+     // es6 문법 축약 ( 이름이 같으면 )
+    TodoHeader,
+    TodoInput,
+    TodoList,
+    TodoFooter,
   },
-  created : function(){
+  created(){
     if(localStorage.length > 0){
-      for(var i=0;i<localStorage.length;i++){
+      for(let i=0;i<localStorage.length;i++){
         if(localStorage.key(i) !== 'loglevel:webpack-dev-server'){
           this.todoItems.push(JSON.parse(localStorage.getItem(localStorage.key(i))));
         }
@@ -38,18 +43,18 @@ export default {
     }
   },
   methods:{
-    addOneItem : function(todoItem){
-      var obj = {completed : false, item : todoItem};
-      localStorage.setItem(todoItem,JSON.stringify(obj));
+    addOneItem(newTodoItem){ // 다시 보자
+      const obj = {completed : false, item : newTodoItem};
+      localStorage.setItem(newTodoItem,JSON.stringify(obj));
       this.todoItems.push(obj);
     },
-    removeOneItem:function(todoItem,index){
+    removeOneItem(todoItem,index){
       // 저장소에서 하나지우고
       // 화면상에서도 하나지우고
       localStorage.removeItem(todoItem.item);
       this.todoItems.splice(index,1);
     },
-    toggleOneItem:function(todoItem,index){
+    toggleOneItem(todoItem,index){
       // todoItem.completed = !(todoItem.completed);
       // 넘긴로직을 app.vue에서 어울리게 다시 수정
       this.todoItems[index].completed = !this.todoItems[index].completed;
@@ -57,7 +62,7 @@ export default {
       localStorage.removeItem(todoItem.item);
       localStorage.setItem(todoItem.item,JSON.stringify(todoItem));
     },
-    removeAll:function(){
+    removeAll(){
       localStorage.clear();
       this.todoItems = [];
     }
