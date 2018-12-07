@@ -34,7 +34,9 @@ export default {
   methods : {
     addTodo(){
       if(this.newTodoItem !== ''){
-        this.$emit('addTodoItem',this.newTodoItem);
+        //this.$emit('addTodoItem',this.newTodoItem);
+        const text = this.newTodoItem.trim(); // 앞뒤 공백제거
+        this.$store.commit('addOneItem',text);
         this.clearInput();
       }else{
         //alert('입력해주세요');
